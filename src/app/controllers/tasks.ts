@@ -42,8 +42,18 @@ export function update(req, res, next) {
   const { id } = req.params;
 }
 
-export function deleteTask(req, res) {
+export async function deleteTask(req, res) {
   const { id } = req.params;
 
+  if (!id) {
+    return res.status(400).json({
+      "error": "missing the id parameter"
+    })
+  }
 
+  await tasksServices.deleteTask(Number(id))
+
+  return res.status(200).json({
+    "success": "The task has been deleted"
+  })
 }

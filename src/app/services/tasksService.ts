@@ -28,3 +28,11 @@ export async function getTask(taskID:number) {
   })
   return task
 }
+
+export async function deleteTask(taskID:number) {
+  await prisma.tasks.delete({
+    where: {
+      id: taskID
+    }
+  })
+}
