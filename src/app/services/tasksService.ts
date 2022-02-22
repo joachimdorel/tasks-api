@@ -9,6 +9,7 @@ export async function getTasks(): Promise<Tasks[]> {
   return tasks
 }
 
+// Create a task
 export async function createTask(title) {
   const task: Tasks = await prisma.tasks.create({
     data: {
@@ -20,6 +21,7 @@ export async function createTask(title) {
   return task
 }
 
+// Retrieve a task
 export async function getTask(taskID:number) {
   const task: Tasks = await prisma.tasks.findUnique({
     where: {
@@ -29,6 +31,20 @@ export async function getTask(taskID:number) {
   return task
 }
 
+export async function update(taskID: number, taskTitle: string) {
+  const task: Tasks = await prisma.tasks.update({
+    where: {
+      id: taskID
+    },
+    data: {
+      title: taskTitle
+    }
+  });
+
+  return task;
+}
+
+// Delete a task
 export async function deleteTask(taskID:number) {
   await prisma.tasks.delete({
     where: {
@@ -36,3 +52,26 @@ export async function deleteTask(taskID:number) {
     }
   })
 }
+
+// Validate a task
+export async function validate(taskID: number) {
+  const task: Tasks = await prisma.tasks.update({
+    where: {
+      id: taskID
+    },
+    data: { done: true }
+  })
+  return task
+}
+
+// Cancel a validated task
+export async function undo(taskID: number) {
+  const task: Tasks = await prisma.tasks.update({
+    where: {
+      id: taskID
+    },
+    data: { done: false }
+  })
+  return task
+}
+
