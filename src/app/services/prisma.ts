@@ -1,11 +1,10 @@
 
 import { PrismaClient } from '@prisma/client'
-import { Task } from '../models/task';
 
 const prisma = new PrismaClient()
 
 async function main() {
-  const allTasks = await prisma.tasks.findMany();
+  const allTasks = await prisma.task.findMany();
    return allTasks
 }
 

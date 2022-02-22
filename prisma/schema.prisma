@@ -7,9 +7,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Tasks {
-  id         Int       @id @default(autoincrement())
+model Task {
+  id         Int        @id @default(autoincrement())
   title      String
   done       Boolean
-  created_at DateTime? @db.Timestamp(6)
+  users      User[]     @relation(references: [id])
+  createdAt  DateTime   @default(now())
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  role      Role      @default(USER)
+  tasks     Task[]    @relation(references: [id])
+
+  createdAt DateTime  @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
 }

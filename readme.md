@@ -39,3 +39,11 @@ The project is then accessible on the route:
 * ```GET  /tasks/:id/delete```
 
   Delete the task with the id *id*
+
+* ```GET  /tasks/:id/validate```
+
+  Validate the task with the id *id*
+
+* ```GET  /tasks/:id/undo```
+
+  Cancel the validation of the task with the id *id*
