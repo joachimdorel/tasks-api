@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "@prisma/client": "^3.9.1",
-    "express": "^4.17.2"
+    "body-parser": "^1.19.2",
+    "express": "^4.17.2",
+    "http-errors": "^2.0.0"
   }
 }

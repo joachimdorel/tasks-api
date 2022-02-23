@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient, Task } from '@prisma/client'
+import { PrismaClient, Task } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
@@ -29,10 +29,10 @@ export async function createTask(title) {
   }
 }
 
-// Retrieve a task
+// Get a task
 export async function getTask(taskID:number) {
   try {
-    const task: Task = await prisma.task.findUnique({
+    const task: Task = await prisma.task.findFirst({
       where: {
         id: taskID
       }
@@ -44,6 +44,7 @@ export async function getTask(taskID:number) {
   }
 }
 
+// Update a task
 export async function update(taskID: number, taskTitle: string) {
   try {
     const task: Task = await prisma.task.update({
@@ -101,11 +102,10 @@ export async function undo(taskID: number) {
       },
       data: { done: false }
     })
-    return task
- 
+
+    return task 
   } catch(error) {
-    console.dir(error.message)
-    return null
+    return error
   }
 }
 

@@ -7,8 +7,10 @@ To launch the project:
 
 The project is then accessible on the route:
 
-```http://localhost:3000/``` 
+```http://localhost:3000/```
 
+To migrate the database
+```npx prisma migrate dev --name "<NAME_OF_MIGRATION>" --preview-feature```
 
 ## API Documentation
 
